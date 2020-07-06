@@ -1,0 +1,119 @@
+{
+  "name": "build-reactive-websites-with-rxj",
+  "description": "exercises for the book: build-reactive-websites-with-rxj",
+  "version": "1.0.0",
+  "copyright": "PragProg",
+  "license": "SEE LICENSE IN LICENSE",
+  "main": "src/index.js",
+  "engines": {
+    "node": ">=11",
+    "npm": ">=6",
+    "yarn": ">=1"
+  },
+  "scripts": {
+    "format": "prettier --write \"src/**/*.{js,jsx,html}\"",
+    "lint": "esw \"src/**/*.{js,jsx}\" --quiet",
+    "lint:watch": "npm run lint -- --watch",
+    "start": "rimraf dist && parcel index.html",
+    "tdd": "npm-run-all --parallel lint:watch test:watch",
+    "test": "jest --forceExit --notify --detectOpenHandles src",
+    "test:coverage": "npm test -- --coverage",
+    "test:watch": "npm test -- --watchAll",
+    "validate": "npm run format && npm run lint && npm run test:coverage"
+  },
+  "dependencies": {
+    "rxjs": "5.4.0",
+    "src": "^1.1.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-proposal-decorators": "^7.4.4",
+    "@babel/preset-env": "^7.5.5",
+    "@testing-library/dom": "^5.6.0",
+    "@testing-library/jest-dom": "^4.0.0",
+    "babel-core": "^7.0.0-0",
+    "babel-eslint": "^8.2.1",
+    "core-js": "^3.1.4",
+    "eslint": "^4.19.1",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-friendly-formatter": "^3.0.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-jest": "^21.15.1",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-prettier": "^2.6.2",
+    "eslint-plugin-promise": "^3.8.0",
+    "eslint-plugin-standard": "^3.1.0",
+    "eslint-watch": "^6.0.1",
+    "jest": "^24.8.0",
+    "lint-staged": "^9.2.1",
+    "npm-run-all": "^4.1.5",
+    "parcel-bundler": "^1.12.4",
+    "parcel-plugin-static-files-copy": "^2.4.3",
+    "prettier": "^1.18.2",
+    "rimraf": "^2.6.2",
+    "should": "^13.2.3",
+    "testdouble": "^3.12.2",
+    "testdouble-jest": "^2.0.0"
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ]
+    ],
+    "plugins": [
+      [
+        "@babel/plugin-proposal-decorators",
+        {
+          "legacy": true
+        },
+        "@babel/plugin-proposal-decorators"
+      ],
+      [
+        "@babel/plugin-proposal-class-properties",
+        {},
+        "@babel/plugin-proposal-class-properties"
+      ]
+    ]
+  },
+  "jest": {
+    "forceCoverageMatch": [
+      "**/*.spec.js"
+    ],
+    "moduleFileExtensions": [
+      "js"
+    ],
+    "notify": true,
+    "notifyMode": "always",
+    "setupFiles": [
+      "<rootDir>/setup-jest.js"
+    ],
+    "testEnvironment": "jsdom",
+    "transform": {
+      "^.+\\.(js|ts|tsx)$": "babel-jest"
+    },
+    "testMatch": [
+      "(**/*.spec|**/*.test).+(js|ts|tsx)"
+    ]
+  },
+  "prettier": {
+    "bracketSpacing": false,
+    "printWidth": 80,
+    "semi": false,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "none",
+    "useTabs": false
+  },
+  "staticFiles": {
+    "staticPath": "assets",
+    "watcherGlob": "**"
+  }
+}
