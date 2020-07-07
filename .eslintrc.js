@@ -1,6 +1,7 @@
 module.exports = {
   globals: {
     HTMLElement: true,
+    MouseEvent: true,
     localStorage: true,
     fetch: true
   },
