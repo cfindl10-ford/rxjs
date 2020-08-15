@@ -1,9 +1,18 @@
 import * as jQuery from 'jquery'
-import {of} from 'rxjs'
+import {fromEvent} from 'rxjs'
 import {fromPromise} from 'rxjs/internal-compatibility'
 import {map, mergeMap} from 'rxjs/operators'
 
-const urlStream = of('https://api.github.com/users')
+const refresh = document.querySelector('.refresh')
+const refreshClickStream = fromEvent(refresh, 'click')
+
+const urlStream = refreshClickStream.pipe(
+  map(event => {
+    const offset = Math.floor(Math.random() * 500)
+    return 'http://api.github.com/users?since=' + offset
+  }),
+)
+
 const responseStream = urlStream.pipe(
   mergeMap(url => fromPromise(jQuery.getJSON(url))),
 )
@@ -30,6 +39,3 @@ function render(user, selector) {
 user1Stream.subscribe(user => render(user, '.suggestion1'))
 user2Stream.subscribe(user => render(user, '.suggestion2'))
 user3Stream.subscribe(user => render(user, '.suggestion3'))
-
-const refresh = document.querySelector('.refresh')
-console.log(refresh)
