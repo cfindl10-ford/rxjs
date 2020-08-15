@@ -27,6 +27,9 @@ function render(user, selector) {
   img.src = user.avatar_url
 }
 
-user1Stream.subscribe(user => render(user, '.suggestion1'))
-user2Stream.subscribe(user => render(user, '.suggestion2'))
-user3Stream.subscribe(user => render(user, '.suggestion3'))
+// user1Stream.subscribe(user => render(user, '.suggestion1'))
+// user2Stream.subscribe(user => render(user, '.suggestion2'))
+// user3Stream.subscribe(user => render(user, '.suggestion3'))
+
+const refresh = document.querySelector('.refresh')
+console.log(refresh)
