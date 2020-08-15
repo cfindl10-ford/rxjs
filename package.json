@@ -1,8 +1,8 @@
 {
-  "name": "build-reactive-websites-with-rxj",
-  "description": "exercises for the book: build-reactive-websites-with-rxj",
+  "name": "introduction-to-rxjs-andre-staltz",
+  "description": "exercises for the egghead.io course",
   "version": "1.0.0",
-  "copyright": "PragProg",
+  "copyright": "Andre Staltz",
   "license": "SEE LICENSE IN LICENSE",
   "main": "src/index.js",
   "engines": {
@@ -22,7 +22,8 @@
     "validate": "npm run format && npm run lint && npm run test:coverage"
   },
   "dependencies": {
-    "rxjs": "5.4.0",
+    "rxjs": "latest",
+    "jquery": "latest",
     "src": "^1.1.2"
   },
   "devDependencies": {
@@ -56,61 +57,6 @@
     "should": "^13.2.3",
     "testdouble": "^3.12.2",
     "testdouble-jest": "^2.0.0"
-  },
-  "babel": {
-    "presets": [
-      [
-        "@babel/preset-env",
-        {
-          "targets": {
-            "node": "current"
-          }
-        }
-      ]
-    ],
-    "plugins": [
-      [
-        "@babel/plugin-proposal-decorators",
-        {
-          "legacy": true
-        },
-        "@babel/plugin-proposal-decorators"
-      ],
-      [
-        "@babel/plugin-proposal-class-properties",
-        {},
-        "@babel/plugin-proposal-class-properties"
-      ]
-    ]
-  },
-  "jest": {
-    "forceCoverageMatch": [
-      "**/*.spec.js"
-    ],
-    "moduleFileExtensions": [
-      "js"
-    ],
-    "notify": true,
-    "notifyMode": "always",
-    "setupFiles": [
-      "<rootDir>/setup-jest.js"
-    ],
-    "testEnvironment": "jsdom",
-    "transform": {
-      "^.+\\.(js|ts|tsx)$": "babel-jest"
-    },
-    "testMatch": [
-      "(**/*.spec|**/*.test).+(js|ts|tsx)"
-    ]
-  },
-  "prettier": {
-    "bracketSpacing": false,
-    "printWidth": 80,
-    "semi": false,
-    "singleQuote": true,
-    "tabWidth": 2,
-    "trailingComma": "none",
-    "useTabs": false
   },
   "staticFiles": {
     "staticPath": "assets",

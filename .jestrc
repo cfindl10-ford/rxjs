@@ -1,0 +1,12 @@
+{
+  "forceCoverageMatch": ["**/*.spec.js"],
+  "moduleFileExtensions": ["js"],
+  "notify": true,
+  "notifyMode": "always",
+  "setupFiles": ["<rootDir>/setup-jest.js"],
+  "testEnvironment": "jsdom",
+  "transform": {
+    "^.+\\.(js|ts|tsx)$": "babel-jest"
+  },
+  "testMatch": ["(**/*.spec|**/*.test).+(js|ts|tsx)"]
+}

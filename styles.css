@@ -1,84 +1,36 @@
-/*noinspection CssUnknownTarget*/
-@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
-
-html,
 body {
+  font-family: sans-serif;
+  padding: 10px;
+}
+h3 {
+  font-weight: bold;
+  display: inline-block;
   padding: 0;
   margin: 0;
 }
-
-html {
-  font-family: "Roboto", sans-serif;
-  font-size: 62.5%;
-  font-weight: normal;
-  letter-spacing: 0.2px;
-  color: #545e6f;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.refresh {
+  font-size: 80%;
+  margin-left: 10px;
 }
-
-body {
-  background: #f1f2f5;
-}
-
 .header {
-  background: #451771;
-  padding: 20px 25px;
+  background: #ececec;
+  padding: 5px;
 }
-
-.logo {
-  display: flex;
-  justify-content: center;
+.suggestions {
+  border: 2px solid #ececec;
 }
-
-.logo-ultimate {
-  height: 30px;
-  width: 30px;
-  background: url("https://drive.google.com/uc?export=view&id=1gjKk20q5MgptDtuXqc0gAPFcSmkcHJZA")
-    no-repeat center center;
-  background-size: contain;
+li {
+  padding: 5px;
 }
-
-.logo-name {
-  margin: 0 0 0 14px;
-  line-height: 30px;
-  font-size: 1.6rem;
-  color: #fff;
+li img {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
 }
-
-.header-logo img {
-  height: 100%;
-}
-
-#app {
-  padding-top: 50px;
-  text-align: center;
-}
-
-#app h1 {
-  margin: 0;
-  font-size: 3rem;
-}
-
-#app h1:before {
-  content: "";
-  background: url("https://drive.google.com/uc?export=view&id=1Dbmt6tlQ-fvMf6VCAGEjr5jZewymhdUE")
-    no-repeat center center;
-  background-size: contain;
-  width: 34px;
-  height: 34px;
+li .username,
+li .close {
   display: inline-block;
-  margin-right: 14px;
   position: relative;
-  top: 6px;
-}
-
-img {
-  width: 75px;
-  height: 75px;
-}
-
-.large {
-  width: 145px;
-  height: 145px;
+  bottom: 15px;
+  left: 5px;
 }

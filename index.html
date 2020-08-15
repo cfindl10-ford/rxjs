@@ -1,55 +1,37 @@
-<html lang="en">
-<head>
-  <style>
-    body {
-      background-color:black
-    }
-    #back {
-      position: fixed;
-      bottom: 0px;
-      margin: 10px;
-    }
-    #sub {
-      position: fixed;
-      left: 50%;
-      transform: translateX(-50%);
-      bottom: 0px;
-      margin-bottom: 10px;
-    }
-    #next {
-      position: fixed;
-      bottom: 0px;
-      right: 0px;
-      margin: 10px;
-    }
-    #img {
-      position:fixed;
-      display: block;
-      left: 50%;
-      top: 50%;
-      transform: translateX(-50%) translateY(-50%);
-      max-width:640px;
-      max-height:480px;
-      width: auto;
-      height: auto;
-    }
-    #loading {
-      position:fixed;
-      display: block;
-      left: 50%;
-      top: 50%;
-      transform: translateX(-50%) translateY(-50%);
-      width: auto;
-      height: auto;
-      visibility: hidden
-    }
-  </style>
-  <title>image reddit viewer</title>
-</head>
-<body>
-  <img id="img" alt="hello">
-  <img id="loading" src="https://jhusain.github.io/reddit-image-viewer/loading.svg" alt="hello">
-  <button id="back">Back</button><select id="sub"><option>pics</option><option>cute</option></select><button id="next">Next</button>
-  <script src="src/index.js"></script>
-</body>
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="app.css" />
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h3>Who to follow</h3>
+        <a href="#" class="refresh">Refresh</a>
+      </div>
+      <ul class="suggestions">
+        <li class="suggestion1">
+          <img />
+          <a href="#" target="_blank" class="username"
+            >this will not be displayed</a
+          >
+          <a href="#" class="close close1">x</a>
+        </li>
+        <li class="suggestion2">
+          <img />
+          <a href="#" target="_blank" class="username">neither this</a>
+          <a href="#" class="close close2">x</a>
+        </li>
+        <li class="suggestion3">
+          <img />
+          <a href="#" target="_blank" class="username">nor this</a>
+          <a href="#" class="close close3">x</a>
+        </li>
+      </ul>
+    </div>
+    <script src="https://code.jquery.com/jquery-1.7.2.js"></script>
+    <script src="https://unpkg.com/rxjs@5.4.3/bundles/Rx.min.js"></script>
+    <script src="script.js"></script>
+  </body>
 </html>
