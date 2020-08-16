@@ -1,16 +1,19 @@
 import * as jQuery from 'jquery'
-import {fromEvent, from} from 'rxjs'
+import {fromEvent, from, of, merge} from 'rxjs'
 import {map, mergeMap} from 'rxjs/operators'
 
 const refresh = document.querySelector('.refresh')
 const refreshClickStream = fromEvent(refresh, 'click')
+const startupUrlStream = of('http://api.github.com/users')
 
-const urlStream = refreshClickStream.pipe(
+const refreshUrlStream = refreshClickStream.pipe(
   map(event => {
     const offset = Math.floor(Math.random() * 500)
     return 'http://api.github.com/users?since=' + offset
   }),
 )
+
+const urlStream = merge(startupUrlStream, refreshUrlStream)
 
 const responseStream = urlStream.pipe(
   mergeMap(url => from(jQuery.getJSON(url))),
