@@ -27,6 +27,10 @@ const user1Stream = createUserStream(responseStream)
 const user2Stream = createUserStream(responseStream)
 const user3Stream = createUserStream(responseStream)
 
+user1Stream.subscribe(user => render(user, '.suggestion1'))
+user2Stream.subscribe(user => render(user, '.suggestion2'))
+user3Stream.subscribe(user => render(user, '.suggestion3'))
+
 function render(user, selector) {
   const element = document.querySelector(selector)
   const username = element.querySelector('.username')
@@ -35,7 +39,3 @@ function render(user, selector) {
   username.textContent = user.login
   img.src = user.avatar_url
 }
-
-user1Stream.subscribe(user => render(user, '.suggestion1'))
-user2Stream.subscribe(user => render(user, '.suggestion2'))
-user3Stream.subscribe(user => render(user, '.suggestion3'))
