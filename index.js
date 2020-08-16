@@ -1,6 +1,5 @@
 import * as jQuery from 'jquery'
-import {fromEvent} from 'rxjs'
-import {fromPromise} from 'rxjs/internal-compatibility'
+import {fromEvent, from} from 'rxjs'
 import {map, mergeMap} from 'rxjs/operators'
 
 const refresh = document.querySelector('.refresh')
@@ -14,7 +13,7 @@ const urlStream = refreshClickStream.pipe(
 )
 
 const responseStream = urlStream.pipe(
-  mergeMap(url => fromPromise(jQuery.getJSON(url))),
+  mergeMap(url => from(jQuery.getJSON(url))),
 )
 
 function createUserStream(responseStream) {
