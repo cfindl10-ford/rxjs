@@ -13,6 +13,8 @@ const refreshUrlStream = refreshClickStream.pipe(
   }),
 )
 
+// const startRefreshClickStream = refreshClickStream.pipe(map(event => null))
+
 const urlStream = merge(startupUrlStream, refreshUrlStream)
 
 const responseStream = urlStream.pipe(
@@ -20,9 +22,12 @@ const responseStream = urlStream.pipe(
 )
 
 function createUserStream(responseStream) {
-  return responseStream.pipe(
-    map(users => users[Math.floor(Math.random() * users.length)]),
-    startWith(null),
+  return merge(
+    responseStream.pipe(
+      map(users => users[Math.floor(Math.random() * users.length)]),
+      startWith(null),
+    ),
+    refreshClickStream.pipe(map(event => null)),
   )
 }
 
