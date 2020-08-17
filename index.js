@@ -1,6 +1,6 @@
 import * as jQuery from 'jquery'
 import {fromEvent, from, of, merge} from 'rxjs'
-import {map, mergeMap} from 'rxjs/operators'
+import {map, mergeMap, startWith} from 'rxjs/operators'
 
 const refresh = document.querySelector('.refresh')
 const refreshClickStream = fromEvent(refresh, 'click')
@@ -22,6 +22,7 @@ const responseStream = urlStream.pipe(
 function createUserStream(responseStream) {
   return responseStream.pipe(
     map(users => users[Math.floor(Math.random() * users.length)]),
+    startWith(null),
   )
 }
 
@@ -35,6 +36,11 @@ user3Stream.subscribe(user => render(user, '.suggestion3'))
 
 function render(user, selector) {
   const element = document.querySelector(selector)
+  if (user === null) {
+    element.style.visibility = 'hidden'
+    return
+  }
+  element.style.visibility = 'visible'
   const username = element.querySelector('.username')
   const img = element.querySelector('img')
   username.href = user.html_url
