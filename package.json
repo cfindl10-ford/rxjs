@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "copyright": "Andre Staltz",
   "license": "SEE LICENSE IN LICENSE",
-  "main": "index.js",
+  "main": "src/egghead-introduction-to-reactive-programming.js",
   "engines": {
     "node": ">=11",
     "npm": ">=6",
