@@ -1,6 +1,6 @@
 import * as jQuery from 'jquery'
 import {fromEvent, from, of, merge} from 'rxjs'
-import {map, mergeMap, startWith} from 'rxjs/operators'
+import {map, mergeMap, shareReplay, startWith, tap} from 'rxjs/operators'
 
 const refresh = document.querySelector('.refresh')
 const refreshClickStream = fromEvent(refresh, 'click')
@@ -13,12 +13,12 @@ const refreshUrlStream = refreshClickStream.pipe(
   }),
 )
 
-// const startRefreshClickStream = refreshClickStream.pipe(map(event => null))
-
 const urlStream = merge(startupUrlStream, refreshUrlStream)
 
 const responseStream = urlStream.pipe(
+  tap(() => console.log('request')),
   mergeMap(url => from(jQuery.getJSON(url))),
+  shareReplay(1),
 )
 
 function createUserStream(responseStream) {
