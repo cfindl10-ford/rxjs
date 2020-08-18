@@ -1,6 +1,18 @@
-import {fromEvent} from 'rxjs'
-import {map} from 'rxjs/operators'
+import {fromEvent, interval} from 'rxjs'
+import {switchMapTo} from 'rxjs/operators'
 
-const clicks = fromEvent(document, 'click')
-const positions = clicks.pipe(map(ev => ev.clientX))
-positions.subscribe(x => console.log(x))
+const log = console.log
+
+// startStream:       ----s----s-s----->
+const startStream = fromEvent(document.querySelector('#start'), 'click')
+
+// intervalStream:    ---0----1---2---->
+const intervalStream = interval(1000)
+
+// startButtonStream:            ----s----s-s----->
+// switchMap(e=>intervalStream): ----i----i-i----->
+// switchMapTo(intervalStream)
+// startIntervalStream:          ----012340101234->
+const startIntervalStream = startStream.pipe(switchMapTo(intervalStream))
+
+startIntervalStream.subscribe(n => log(n))
