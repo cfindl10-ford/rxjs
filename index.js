@@ -1,5 +1,5 @@
 import {fromEvent, interval} from 'rxjs'
-import {scan, startWith, switchMapTo, takeUntil} from 'rxjs/operators'
+import {mapTo, scan, startWith, switchMapTo, takeUntil} from 'rxjs/operators'
 
 const log = console.log
 
@@ -19,12 +19,23 @@ const stopIntervalStream = intervalStream.pipe(takeUntil(stopStream))
 
 // startStream:                     ----s-------s---->
 // switchMapTo(stopIntervalStream): ----01234---567-->
-// startWith(0):                    0---01234---567-->
-// scan(n => n + 1),                0---12345---678-->
+// mapTo(increment):
+// startWith(reset(0)):             0---01234---567-->
+
+// scan((acc, curr) => curr(acc)):  0---12345---678-->
 startStream
   .pipe(
     switchMapTo(stopIntervalStream),
-    startWith(0),
-    scan(n => n + 1),
+    mapTo(increment),
+    startWith(reset()),
+    scan((acc, curr) => curr(acc)),
   )
   .subscribe(n => log(n))
+
+function increment(n) {
+  return n + 1
+}
+
+function reset() {
+  return 0
+}
