@@ -1,5 +1,5 @@
 import {fromEvent, interval} from 'rxjs'
-import {switchMapTo, takeUntil} from 'rxjs/operators'
+import {scan, switchMapTo, takeUntil} from 'rxjs/operators'
 
 const log = console.log
 
@@ -30,4 +30,11 @@ const stopIntervalStream = intervalStream.pipe(takeUntil(stopStream))
 const startIntervalThenStopStream = startStream.pipe(
   switchMapTo(stopIntervalStream),
 )
-startIntervalThenStopStream.subscribe(n => log(n))
+
+// startIntervalThenStopStream:    ----01234---012-->
+// scan(n=0; n+=1):
+// startStopIntervalContinueCount: ----01234---567-->
+const startStopIntervalContinueCount = startIntervalThenStopStream.pipe(
+  scan(n => n + 1, 0),
+)
+startStopIntervalContinueCount.subscribe(n => log(n))
