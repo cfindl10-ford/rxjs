@@ -1,41 +1,25 @@
-import {fromEvent, interval} from 'rxjs'
+import {fromEvent, interval, merge} from 'rxjs'
 import {mapTo, scan, startWith, switchMapTo, takeUntil} from 'rxjs/operators'
 
 const log = console.log
 
-// startStream:       ----s----s-s----->
 const startStream = fromEvent(document.querySelector('#start'), 'click')
-// stopStream:       -------x--x---x-->
 const stopStream = fromEvent(document.querySelector('#stop'), 'click')
-
-// intervalStream:        ---0----1---2---->
+const resetStream = fromEvent(document.querySelector('#reset'), 'click')
 const intervalStream = interval(1000)
-
-// intervalStream:        ---0----1---2---->
-// stopStream:            --------x-------->
-// takeUntil(stopStream):
-// stopIntervalStream   : ---0----1-------->
 const stopIntervalStream = intervalStream.pipe(takeUntil(stopStream))
 
-// startStream:                     ----s-------s---->
-// switchMapTo(stopIntervalStream): ----01234---567-->
-// mapTo(increment):
-// startWith(reset(0)):             0---01234---567-->
+const increment = n => n + 1
+const reset = () => 0
 
-// scan((acc, curr) => curr(acc)):  0---12345---678-->
+const incrementOrReset = merge(
+  stopIntervalStream.pipe(mapTo(increment)),
+  resetStream.pipe(mapTo(reset)),
+)
 startStream
   .pipe(
-    switchMapTo(stopIntervalStream),
-    mapTo(increment),
+    switchMapTo(incrementOrReset),
     startWith(reset()),
     scan((acc, curr) => curr(acc)),
   )
   .subscribe(n => log(n))
-
-function increment(n) {
-  return n + 1
-}
-
-function reset() {
-  return 0
-}
