@@ -1,5 +1,5 @@
-import {fromEvent, interval, merge} from 'rxjs'
-import {mapTo, scan, startWith, switchMap, takeUntil} from 'rxjs/operators'
+import {fromEvent, interval, merge, combineLatest} from 'rxjs'
+import {map, mapTo, scan, startWith, switchMap, takeUntil} from 'rxjs/operators'
 
 const log = console.log
 
@@ -8,6 +8,7 @@ const stopStream = fromEvent(document.querySelector('#stop'), 'click')
 const resetStream = fromEvent(document.querySelector('#reset'), 'click')
 const halfStream = fromEvent(document.querySelector('#half'), 'click')
 const quarterStream = fromEvent(document.querySelector('#quarter'), 'click')
+
 const increment = n => n + 1
 const reset = () => 0
 
@@ -27,10 +28,12 @@ const setIncrementAndCountUntilStopOrReset = time =>
     2,
   )
 
-startStreams
-  .pipe(
-    switchMap(setIncrementAndCountUntilStopOrReset),
-    startWith(reset()),
-    scan((acc, curr) => curr(acc)),
-  )
-  .subscribe(n => log(n))
+const startTimerStream = startStreams.pipe(
+  switchMap(setIncrementAndCountUntilStopOrReset),
+  startWith(reset()),
+  scan((acc, curr) => curr(acc)),
+)
+
+const inputStream = fromEvent(document.querySelector('#input'), 'input').pipe(
+  map(event => event.target.value),
+)
