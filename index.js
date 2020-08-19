@@ -38,6 +38,7 @@ const inputStream = fromEvent(document.querySelector('#input'), 'input').pipe(
   map(event => event.target.value),
 )
 
-combineLatest(startTimerStream, inputStream)
-  .pipe(map(ra => ({count: ra[0], text: ra[1]})))
-  .subscribe(x => log(x))
+combineLatest(startTimerStream, inputStream, (time, text) => ({
+  time: time,
+  text: text,
+})).subscribe(x => log(x))
