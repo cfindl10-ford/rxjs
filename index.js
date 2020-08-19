@@ -7,6 +7,7 @@ import {
   startWith,
   switchMap,
   takeUntil,
+  takeWhile,
 } from 'rxjs/operators'
 
 const log = console.log
@@ -50,5 +51,12 @@ combineLatest(startTimerStream, inputStream, (time, text) => ({
   time: time,
   text: text,
 }))
-  .pipe(filter(x => x.time === parseInt(x.text)))
-  .subscribe(x => log(x))
+  .pipe(
+    takeWhile(x => x.time <= 3),
+    filter(x => x.time === parseInt(x.text)),
+  )
+  .subscribe(
+    x => log(x),
+    error => log(error),
+    () => log('complete'),
+  )
