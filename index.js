@@ -9,6 +9,7 @@ import {
   switchMap,
   takeUntil,
   takeWhile,
+  tap,
 } from 'rxjs/operators'
 
 const log = console.log
@@ -48,11 +49,16 @@ const inputStream = fromEvent(document.querySelector('#input'), 'input').pipe(
   map(event => event.target.value),
 )
 
-combineLatest(startTimerStream, inputStream, (time, text) => ({
-  time: time,
-  text: text,
-}))
+combineLatest(
+  startTimerStream.pipe(tap(x => log(x))),
+  inputStream.pipe(tap(x => log(x))),
+  (time, text) => ({
+    time: time,
+    text: text,
+  }),
+)
   .pipe(
+    tap(x => log(x)),
     takeWhile(x => x.time <= 3),
     filter(x => x.time === parseInt(x.text)),
     reduce((acc, curr) => acc + 1, 0),
