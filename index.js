@@ -3,6 +3,7 @@ import {
   filter,
   map,
   mapTo,
+  reduce,
   scan,
   startWith,
   switchMap,
@@ -54,6 +55,7 @@ combineLatest(startTimerStream, inputStream, (time, text) => ({
   .pipe(
     takeWhile(x => x.time <= 3),
     filter(x => x.time === parseInt(x.text)),
+    reduce((acc, curr) => acc + 1, 0),
   )
   .subscribe(
     x => log(x),
