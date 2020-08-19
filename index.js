@@ -1,5 +1,13 @@
 import {fromEvent, interval, merge, combineLatest} from 'rxjs'
-import {map, mapTo, scan, startWith, switchMap, takeUntil} from 'rxjs/operators'
+import {
+  filter,
+  map,
+  mapTo,
+  scan,
+  startWith,
+  switchMap,
+  takeUntil,
+} from 'rxjs/operators'
 
 const log = console.log
 
@@ -41,4 +49,6 @@ const inputStream = fromEvent(document.querySelector('#input'), 'input').pipe(
 combineLatest(startTimerStream, inputStream, (time, text) => ({
   time: time,
   text: text,
-})).subscribe(x => log(x))
+}))
+  .pipe(filter(x => x.time === parseInt(x.text)))
+  .subscribe(x => log(x))
