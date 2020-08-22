@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="styles.css" />
+    <meta charset="utf-8" />
+    <title>introduction to rxjs by Andres Staltz</title>
+  </head>
+  <body>
+    <label for="input">input: </label>
+    <input type="text" id="input" />
+    <hr />
+    <button id="start">start</button>
+    <button id="stop">stop</button>
+    <button id="reset">reset</button>
+    <button id="half">half</button>
+    <button id="quarter">quarter</button>
+    <hr />
+    <div class="container">
+      <div class="header">
+        <h3>Who to follow</h3>
+        <a href="#" class="refresh">Refresh</a>
+      </div>
+      <ul class="suggestions">
+        <li class="suggestion1">
+          <img />
+          <a href="#" target="_blank" class="username"
+            >this will not be displayed</a
+          >
+          <a href="#" class="close close1">x</a>
+        </li>
+        <li class="suggestion2">
+          <img />
+          <a href="#" target="_blank" class="username">neither this</a>
+          <a href="#" class="close close2">x</a>
+        </li>
+        <li class="suggestion3">
+          <img />
+          <a href="#" target="_blank" class="username">nor this</a>
+          <a href="#" class="close close3">x</a>
+        </li>
+      </ul>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>
