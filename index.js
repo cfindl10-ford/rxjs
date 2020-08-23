@@ -21,9 +21,9 @@ const state$ = from(users).pipe(
 )
 
 const name$ = state$.pipe(
+  distinctUntilChanged(),
   tap(log),
   map(state => state.name),
-  distinctUntilChanged(),
 )
 
 name$.subscribe(log)
