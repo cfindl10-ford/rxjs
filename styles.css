@@ -60,6 +60,10 @@ body {
   font-size: 3rem;
 }
 
+#app h2 {
+  font-size: 2rem;
+}
+
 #app h1:before {
   content: '';
   background: url('https://drive.google.com/uc?export=view&id=1Dbmt6tlQ-fvMf6VCAGEjr5jZewymhdUE')
@@ -79,4 +83,9 @@ body {
   height: 2em;
   width: 0.1%;
   background: #ff16b7;
+}
+
+#message {
+  font-size: 4em;
+  font-weight: bold;
 }

@@ -1,22 +1,3 @@
-import {fromEvent} from 'rxjs'
-import {map} from 'rxjs/operators'
+import {interval} from 'rxjs'
 
-const percentageProgressFor = ({
-  scrollTop,
-  scrollHeight,
-  clientHeight,
-}) => (scrollTop / (scrollHeight - clientHeight)) * 100
-
-const scrollStream = fromEvent(window, 'scroll')
-
-const progressStream = scrollStream.pipe(
-  map(({target: {scrollingElement}}) =>
-    percentageProgressFor(scrollingElement),
-  ),
-)
-
-const progressElem = document.querySelector('.progress')
-
-progressStream.subscribe(percentage => {
-  progressElem.style.width = `${percentage}%`
-})
+const log = console.log
