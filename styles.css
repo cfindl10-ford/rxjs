@@ -1,3 +1,4 @@
+/*noinspection CssUnknownTarget*/
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
 html,
@@ -70,4 +71,12 @@ body {
   margin-right: 14px;
   position: relative;
   top: 6px;
+}
+
+.progress {
+  position: fixed;
+  top: 0;
+  height: 2em;
+  width: 0.1%;
+  background: #ff16b7;
 }
