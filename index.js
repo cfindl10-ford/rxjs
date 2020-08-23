@@ -1,6 +1,6 @@
 import {from} from 'rxjs'
 import {
-  distinctUntilChanged,
+  distinctUntilKeyChanged,
   map,
   scan,
   tap,
@@ -21,9 +21,7 @@ const state$ = from(users).pipe(
 )
 
 const name$ = state$.pipe(
-  distinctUntilChanged(
-    (prev, curr) => prev.name === curr.name,
-  ),
+  distinctUntilKeyChanged('name'),
   tap(log),
   map(state => state.name),
 )
