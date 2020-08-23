@@ -21,7 +21,9 @@ const state$ = from(users).pipe(
 )
 
 const name$ = state$.pipe(
-  distinctUntilChanged(),
+  distinctUntilChanged(
+    (prev, curr) => prev.name === curr.name,
+  ),
   tap(log),
   map(state => state.name),
 )
